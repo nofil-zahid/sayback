@@ -1,146 +1,159 @@
 # Sayback
 
-Sayback is a small command-line tool that animates a message in the terminal, revealing its letters one at a time. Adjust the typing speed, add terminal color, convert the message to uppercase, or replay it multiple times.
+<p align="center">
+  <strong>An animated typewriter & letter-cycling CLI for your terminal.</strong>
+</p>
 
-## What It Does
+<p align="center">
+  <a href="https://www.npmjs.com/package/sayback"><img src="https://img.shields.io/npm/v/sayback.svg?style=flat-square&color=blue" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/sayback"><img src="https://img.shields.io/npm/l/sayback.svg?style=flat-square&color=green" alt="license" /></a>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/node/v/sayback.svg?style=flat-square&color=brightgreen" alt="node version" /></a>
+  <a href="https://github.com/nofil-zahid/sayback/actions/workflows/ci.yaml"><img src="https://github.com/nofil-zahid/sayback/actions/workflows/ci.yaml/badge.svg" alt="CI status" /></a>
+</p>
 
-Sayback is useful for adding a simple typewriter-style effect to a terminal message. It is a standalone CLI project written in TypeScript and runs on Node.js. The animation is printed in place with a `>>` prompt, so each character appears progressively rather than as a single line of text.
+---
 
-The current implementation is intended for ASCII letters, spaces, and supported ASCII punctuation. Digits and non-ASCII characters are not currently animated correctly.
+**Sayback** is a lightweight command-line tool that brings your terminal text to life with a retro character-cycling animation. Watch as letters roll through the alphabet and lock into place letter-by-letter. Customize typing speed, terminal colors, case transformations, and repeat cycles.
 
-## Requirements
+## ✨ Features
 
-- Node.js 22 or newer
-- npm
+- 🔤 **Dynamic Character Cycling** — Letters tumble through the ASCII alphabet before locking into the target character.
+- 🎨 **ANSI Color Palette** — Highlight animations in `cyan`, `green`, `yellow`, `blue`, or `red`.
+- ⏱️ **Configurable Speed** — Control the frame delay to create lightning-fast reveals or suspenseful slow typing.
+- 🔁 **Repeat Loops** — Replay the animation multiple times seamlessly.
+- 🔠 **Case Transformation** — Quick `--uppercase` flag to emphasize your message.
+- ⚡ **Zero Runtime Dependencies** — Pure TypeScript / Node.js with zero bloat.
 
-## Get Started
+---
 
-Clone the repository, install its dependencies, and compile the TypeScript source:
+## 🚀 Quick Start
+
+Run instantly without installation using **npx**:
+
+```sh
+npx sayback "Hello World"
+```
+
+Or install globally via **npm**:
+
+```sh
+npm install -g sayback
+```
+
+Then run `sayback` anywhere in your terminal:
+
+```sh
+sayback "Welcome to Sayback!"
+```
+
+---
+
+## 📖 Usage
+
+```sh
+sayback <message> [options]
+```
+
+> **Note:** Enclose multi-word messages in quotes.
+
+### CLI Options
+
+| Option | Shorthand | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `--delay=<ms>` | | `number` | `100` | Milliseconds between character steps (`>= 0`). |
+| `--color=<color>` | | `string` | _none_ | ANSI color: `cyan`, `green`, `yellow`, `blue`, `red`. |
+| `--repeat=<count>` | | `number` | `1` | Number of times to replay the animation (`>= 1`). |
+| `--uppercase` | | `boolean` | `false` | Converts message to uppercase prior to animation. |
+| `--help` | `-h`, `help` | `flag` | | Displays the usage and help guide. |
+
+---
+
+## 💡 Examples
+
+### Default Speed & Standard Output
+```sh
+sayback "Hello World"
+```
+
+### Fast Typing Reveal
+```sh
+sayback "Deploying to production..." --delay=25
+```
+
+### Colored Output
+```sh
+sayback "Build succeeded!" --color=green
+```
+
+### Uppercase with Repeat Loop
+```sh
+sayback "Attention!" --color=yellow --uppercase --repeat=3
+```
+
+### All Options Combined
+```sh
+sayback "Hello Cyberpunk" --delay=40 --color=cyan --uppercase --repeat=2
+```
+
+---
+
+## ℹ️ Character Support
+
+Sayback currently animates **standard ASCII letters (a-z, A-Z)**, spaces, and standard ASCII punctuation marks (`!`, `?`, `.`, `,`, etc.). Punctuation marks and spaces render immediately, while letters cycle through ASCII values until reaching the target character. Support for numerical digits and extended UTF-8 characters is planned for upcoming releases.
+
+---
+
+## 🛠️ Local Development
+
+If you want to contribute or develop locally:
+
+### 1. Prerequisites
+- [Node.js](https://nodejs.org/) v22 or newer
+- npm v10 or newer
+
+### 2. Setup
+Clone the repository and install dependencies:
 
 ```sh
 git clone https://github.com/nofil-zahid/sayback.git
 cd sayback
 npm ci
+```
+
+### 3. Build & Run
+```sh
+# Compile TypeScript to dist/
 npm run build
-```
 
-Run Sayback from the project directory:
+# Run in watch mode during development
+npm run dev -- "Test Message" --color=cyan
 
-```sh
-node dist/index.js "Hello World"
-```
-
-To use the `sayback` command directly while developing locally, link the project after building it:
-
-```sh
+# Link package locally to test the CLI globally
 npm link
-sayback "Hello World"
+sayback "Testing local link"
 ```
 
-## Usage
-
-```text
-sayback <message> [options]
-```
-
-The message should be quoted when it contains spaces. Options can be combined:
-
-```sh
-sayback "Hello World" --delay=50 --color=cyan --uppercase --repeat=2
-```
-
-| Option | Description | Default |
-| --- | --- | --- |
-| `--delay=<number>` | Milliseconds to wait between animation steps. Must be zero or greater. | `100` |
-| `--color=<color>` | Color the animation in the terminal. Supported values: `red`, `green`, `blue`, `yellow`, `cyan`. | No color |
-| `--repeat=<number>` | Number of times to animate the message. Must be at least `1`. | `1` |
-| `--uppercase` | Convert the message to uppercase before animating it. | Off |
-| `--help`, `-h`, or `help` | Print the usage guide. | |
-
-Examples:
-
-```sh
-# Use the default animation speed
-sayback "Hello World"
-
-# Animate more quickly
-sayback "Hello World" --delay=25
-
-# Add terminal color
-sayback "Hello World" --color=green
-
-# Repeat the message three times
-sayback "Hello World" --repeat=3
-
-# Combine options
-sayback "Hello World" --delay=50 --color=cyan --uppercase --repeat=2
-
-# Show help
-sayback --help
-```
-
-Colors use ANSI terminal escape codes, so their appearance depends on the terminal being used.
-
-## Development
-
-Install dependencies before running the project scripts:
-
-```sh
-npm ci
-```
-
-Build the project into `dist/`:
-
-```sh
-npm run build
-```
-
-Run the program directly from TypeScript in watch mode:
-
-```sh
-npm run dev -- "Hello World" --delay=50
-```
-
-Run the configured test command:
-
+### 4. Tests
 ```sh
 npm test
 ```
 
-The test command builds the project and invokes Node.js's test runner for compiled tests. The `tests/` directory is currently empty, so no test cases are discovered yet.
+---
 
-## Project Layout
+## 🤝 Contributing
 
-```text
-src/
-	arguments/    Parse CLI messages, options, and flags
-	commands/     Help output and the message animation
-	constants/    Colors, character ranges, and output prefix
-	utils/        Terminal printing and delay helpers
-	validators/   Character validation
-tests/          Automated tests (to be added)
-```
+Contributions, issues, and feature requests are welcome!
 
-## Continuous Integration and Publishing
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/amazing-feature`).
+3. Commit your changes (`git commit -m 'feat: add awesome feature'`).
+4. Push to the branch (`git push origin feature/amazing-feature`).
+5. Open a Pull Request targeting the `development` branch.
 
-GitHub Actions runs the build and test command on branch pushes and on pull requests targeting `main` or `development`. After a successful push to `main`, CI uploads the compiled package as an artifact. The publish workflow waits for that CI run and publishes the package to npm; pull requests and unsuccessful CI runs do not publish. Publishing requires an `NPM_TOKEN` secret configured in the repository's GitHub Actions settings.
+Please check existing [GitHub Issues](https://github.com/nofil-zahid/sayback/issues) before opening a new one.
 
-## Contributing
+---
 
-Contributions are welcome. To propose a change:
+## 📄 License
 
-1. Fork [the repository](https://github.com/nofil-zahid/sayback) on GitHub.
-2. Clone your fork and create a branch for your change:
-
-	```sh
-	git clone https://github.com/<your-github-username>/sayback.git
-	cd sayback
-	git switch -c describe-your-change
-	```
-
-3. Install dependencies with `npm ci`.
-4. Make a focused change. Add or update tests when changing behavior.
-5. Run `npm run build` and `npm test`.
-6. Push your branch to your fork and open a pull request against this repository's `development` branch. Include what changed and how you verified it.
-
-For larger changes or behavior questions, open a [GitHub issue](https://github.com/nofil-zahid/sayback/issues) first so the approach can be discussed before implementation.
+This project is licensed under the [ISC License](https://opensource.org/licenses/ISC).
