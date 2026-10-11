@@ -1,7 +1,10 @@
 .github/
 .gitignore
 .husky/
+.nvmrc
 coverage/
 node_modules/
+src/
 tests/
 tsconfig.json
+*.map
