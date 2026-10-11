@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo ""
+echo "Building project..."
+npm run build
+
+echo ""
+echo "Running tests..."
+npm run test
+
+echo ""
+echo "Pre-commit checks passed!"
