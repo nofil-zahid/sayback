@@ -1,0 +1,13 @@
+
+#!/bin/sh
+
+echo ""
+echo "Building project..."
+npm run build || exit 1
+
+echo ""
+echo "Running tests..."
+npm run test || exit 1
+
+echo ""
+echo "Pre-push checks passed!"
