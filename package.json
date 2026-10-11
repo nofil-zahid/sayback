@@ -1,8 +1,8 @@
 {
   "name": "sayback",
   "version": "1.0.0",
-  "description": "A cli based NPM package that returns the text",
-  "main": "src/index.ts",
+  "description": "A CLI tool that animates terminal text with a retro character-cycling typewriter effect.",
+  "main": "dist/index.js",
   "type": "module",
   "repository": {
     "type": "git",
