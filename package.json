@@ -15,8 +15,12 @@
     "dev": "node --watch ./src/index.ts",
     "build": "tsc",
     "test": "npm run build && node --test dist/tests/*.test.js",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "node dist/scripts/postinstall.js"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "say",
     "speech",
