@@ -1,9 +1,13 @@
 {
   "name": "sayback",
   "version": "1.0.0",
-  "description": "",
+  "description": "A cli based NPM package that returns the text",
   "main": "src/index.ts",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nofil-zahid/sayback.git"
+  },
   "bin": {
     "sayback": "./dist/index.js"
   },
@@ -13,7 +17,16 @@
     "test": "npm run build && node --test dist/tests/*.test.js",
     "prepare": "husky"
   },
-  "keywords": [],
+  "keywords": [
+    "say",
+    "speech",
+    "synthesis",
+    "text-to-speech",
+    "tts",
+    "utilities",
+    "cli",
+    "command-line-tool"
+  ],
   "author": "Nofil Zahid",
   "license": "ISC",
   "devDependencies": {
