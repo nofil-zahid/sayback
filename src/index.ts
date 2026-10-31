@@ -9,7 +9,6 @@ if (args.includes("help") || args.includes("--help") || args.includes("-h")) {
   process.exit(0);
 }
 
-// Initial point
 try {
   const cliArgs = parseArguments(args);
   await sayCommand(cliArgs);
